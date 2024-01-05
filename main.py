@@ -22,6 +22,7 @@ from pybricks.ev3devices import Motor
 from pybricks.parameters import Port
 from pybricks.robotics import DriveBase
 from pybricks.messaging import BluetoothMailboxServer, TextMailbox
+from pybricks.tools import wait
 
 ev3 = EV3Brick()
 
@@ -39,10 +40,24 @@ ev3.screen.clear()
 # and then sends a reply.
 
 mbox.wait()
-ev3.screen.print(mbox.read())
+print("mbox.read ",mbox.read())
 mbox.send('inicia buscador')
-mbox.wait_new() 
-if(mbox.read() == 'buscador terminado'):
+mbox.wait_new()
+
+# Si el mbox.read inicia con un [ significa que es una lista y la guardamos en una variable
+if(mbox.read()[0] == '['):
+    rojos = mbox.read()
+    print("lista roja",rojos)
     ev3.speaker.beep()
+    mbox.send('recibido')
 
+mbox.wait_new()
+if(mbox.read()[0] == '['):
+    verde = mbox.read()
+    print("lista verde",verde)
+    ev3.speaker.beep()
+    mbox.send('recibido')
 
+if(mbox.read() == 'buscador terminado'):
+    pass
+    #ev3.speaker.beep()
