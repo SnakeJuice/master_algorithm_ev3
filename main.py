@@ -49,9 +49,10 @@ if(mbox.read()[0] == '['):
     rojos = mbox.read()
     print("lista roja",rojos)
     ev3.speaker.beep()
-    mbox.send('recibido')
-
+    
+mbox.send('recibido')
 mbox.wait_new()
+
 if(mbox.read()[0] == '['):
     verde = mbox.read()
     print("lista verde",verde)
@@ -59,5 +60,4 @@ if(mbox.read()[0] == '['):
     mbox.send('recibido')
 
 if(mbox.read() == 'buscador terminado'):
-    pass
-    #ev3.speaker.beep()
+    ev3.speaker.beep()
