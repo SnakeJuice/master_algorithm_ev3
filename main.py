@@ -47,7 +47,7 @@ while True:
 # Si el mbox.read inicia con un [ significa que es una lista y la guardamos en una variable
     if(mbox.read()[0] == '['):
         rojos = mbox.read()
-        print("lista roja",rojos)
+        ev3.screen.print("lista roja",rojos)
         ev3.speaker.beep()
     
     mbox.send('recibido')
@@ -55,7 +55,7 @@ while True:
 
     if(mbox.read()[0] == '['):
         verde = mbox.read()
-        print("lista verde",verde)
+        ev3.screen.print("lista verde",verde)
         mbox.send('listo')
 
     mbox.wait_new()
