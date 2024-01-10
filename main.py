@@ -29,10 +29,11 @@ ev3 = EV3Brick()
 server = BluetoothMailboxServer()
 mbox = TextMailbox('greeting', server)
 rbox = TextMailbox('rec1', server)
+rbox2 = TextMailbox('rec2', server)
 
 # The server must be started before the client!
 ev3.screen.print('waiting for connection...')
-server.wait_for_connection(2)
+server.wait_for_connection(3)
 #ev3.screen.print('connected!')
 #robot.wait(300)
 ev3.screen.clear()
@@ -41,13 +42,14 @@ while True:
     mbox.wait()
     print("mbox.read ",mbox.read())
     print("rbox.read ",rbox.read())
+    print("rbox2.read ",rbox2.read())
     mbox.send('inicia buscador')
     mbox.wait_new()
 
 # Si el mbox.read inicia con un [ significa que es una lista y la guardamos en una variable
     if(mbox.read()[0] == '['):
         rojos = mbox.read()
-        print("lista roja",rojos)
+        ev3.screen.print("lista roja",rojos)
         ev3.speaker.beep()
     
     mbox.send('recibido')
@@ -55,11 +57,24 @@ while True:
 
     if(mbox.read()[0] == '['):
         verde = mbox.read()
-        print("lista verde",verde)
+        ev3.screen.print("lista verde",verde)
         mbox.send('listo')
 
     mbox.wait_new()
     print("mbox.read ",mbox.read())
     if(mbox.read() == 'terminado'):
+        rbox.send(rojos)
+    rbox.wait_new()
+    if(rbox.read()=='rojo ok'):
+        rbox.send(verde)
+    rbox.wait_new()    
+    if(rbox.read()=='verde ok'):    
         rbox.send('Recolector1 muevete')
-        ev3.speaker.beep()
+        
+    rbox.wait_new()
+    if(rbox.read()=='termine'): 
+        rbox2.send(verde)
+    rbox2.wait_new()
+    if(rbox2.read()=='ok verdes'):   
+        rbox2.send('inicia')
+        ev3.speaker.beep()   
