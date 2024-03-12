@@ -36,7 +36,7 @@ ev3.screen.print('waiting for connection...')
 server.wait_for_connection(3)
 #ev3.screen.print('connected!')
 #robot.wait(300)
-ev3.screen.clear()
+#ev3.screen.clear()
 
 while True:
     mbox.wait()
