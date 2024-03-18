@@ -50,6 +50,7 @@ while True:
     if(mbox.read()[0] == '['):
         rojos = mbox.read()
         ev3.screen.print("lista roja",rojos)
+        print("Rojos",rojos)
         ev3.speaker.beep()
     
     mbox.send('recibido')
@@ -58,6 +59,7 @@ while True:
     if(mbox.read()[0] == '['):
         verde = mbox.read()
         ev3.screen.print("lista verde",verde)
+        print("Verdes",verde)
         mbox.send('listo')
 
     mbox.wait_new()
