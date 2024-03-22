@@ -6,7 +6,7 @@
 # - Cristian Anjari                                      #
 # - Marcos Medina                                        #
 #                                                        #
-# Para proyecto de tesis 2023                            #
+# Para proyecto de tesis 2024                            #
 #                                                        #
 # Universidad de Santiago de Chile                       #
 # Facultad de Ciencia                                    #
@@ -15,7 +15,7 @@
 # Analista en Computación Científica                     #
 #                                                        #
 # Santiago, Chile                                        #
-# 05/01/2024                                             #
+# 25/03/2024                                             #
 ##########################################################
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor
@@ -56,6 +56,7 @@ while True:
     mbox.send('recibido')
     mbox.wait_new()
 
+# El segundo mbox.read inicia con un [ es la lista de verdes y lo guardamos.
     if(mbox.read()[0] == '['):
         verde = mbox.read()
         ev3.screen.print("lista verde",verde)
