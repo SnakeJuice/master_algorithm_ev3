@@ -70,14 +70,14 @@ while True:
     rbox.wait_new()
     if(rbox.read()=='rojo ok'):
         rbox.send(verde)
-    rbox.wait_new()    
-    if(rbox.read()=='verde ok'):    
+    rbox.wait_new()
+    if(rbox.read()=='verde ok'):
         rbox.send('Recolector1 muevete')
         
     rbox.wait_new()
-    if(rbox.read()=='termine'): 
+    if(rbox.read()=='termine'):
         rbox2.send(verde)
     rbox2.wait_new()
-    if(rbox2.read()=='ok verdes'):   
+    if(rbox2.read()=='ok verdes'):
         rbox2.send('inicia')
-        ev3.speaker.beep()   
+        ev3.speaker.beep()
